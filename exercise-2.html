@@ -31,18 +31,30 @@
 
 <script>
   // Select all the list items on the page and convert to array
-	const items = Array.from(document.querySelectorAll('[data-time]'))
-
+	const items = Array.from(document.querySelectorAll('[data-time]'));
+  console.log("1.", items);
+  // items.forEach(item => console.log(item.textContent));
+ 
   // Filter for only the elements that contain the word 'flexbox'
-
+  const itemsOnlyFlexbox = items.filter(item => item.textContent.indexOf('Flex') > -1);
+  console.log("2.", itemsOnlyFlexbox);
+  
   // map down to a list of time strings
-
+  const timeStrings = itemsOnlyFlexbox.map(item => item.dataset.time);
+  console.log("3.", timeStrings);
+  
   // map to an array of seconds
-
+  const seconds = timeStrings.map(time => time.split(':')[1]);
+  console.log("4.", seconds);
+  
   // reduce to get total time in seconds
-
+  const totalTime = timeStrings.reduce((accumulator, currentValue) => 
+    Number(currentValue.split(':')[0]) * 60 + Number(currentValue.split(':')[1])
+  );
+  console.log("5. Total time is", totalTime);
   // 🔥 This can also be done in a single .reduce(), but we're practicing
   // higher order functions here, so chain them!
+
 </script>
 </body>
 </html>
